@@ -8,10 +8,17 @@ from typing import Callable
 
 from converters.base import ConversionContext, ConversionResult
 from converters.documents import (
+    docx_to_html,
+    docx_to_pdf,
     docx_to_txt,
+    html_to_pdf,
+    html_to_txt,
     libreoffice_convert,
     md_to_html,
+    md_to_pdf,
+    rtf_to_pdf,
     rtf_to_txt,
+    txt_to_html,
     txt_to_pdf,
 )
 from converters.images import image_to_image
@@ -81,9 +88,16 @@ def build_registry(tools: ExternalTools, config: Config) -> ConversionRegistry:
     add("pdf", "png", "PNG", pdf_to_images)
     add("pdf", "jpg", "JPG", pdf_to_images)
     add("txt", "pdf", "PDF", txt_to_pdf)
+    add("txt", "html", "HTML", txt_to_html)
     add("md", "html", "HTML", md_to_html)
+    add("md", "pdf", "PDF", md_to_pdf)
+    add("html", "txt", "TXT", html_to_txt)
+    add("html", "pdf", "PDF", html_to_pdf)
+    add("docx", "pdf", "PDF", docx_to_pdf)
     add("docx", "txt", "TXT", docx_to_txt)
+    add("docx", "html", "HTML", docx_to_html)
     add("rtf", "txt", "TXT", rtf_to_txt)
+    add("rtf", "pdf", "PDF", rtf_to_pdf)
     add("csv", "xlsx", "XLSX", csv_to_xlsx)
     add("xlsx", "csv", "CSV", xlsx_to_csv)
 

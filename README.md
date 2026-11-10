@@ -21,14 +21,14 @@
 |---|---|---|
 | PNG, JPG/JPEG, WEBP, BMP, TIFF, GIF | PNG, JPG, JPEG, WEBP, BMP, TIFF, GIF, PDF | Pillow |
 | PDF | TXT, PNG, JPG | PyMuPDF |
-| TXT | PDF | PyMuPDF |
-| MD | HTML | Python |
-| DOCX | TXT | python-docx |
-| RTF | TXT | Python |
+| TXT | PDF, HTML | PyMuPDF / Python |
+| MD | HTML, PDF | Python / PyMuPDF |
+| DOCX | PDF, TXT, HTML | python-docx / PyMuPDF |
+| RTF | TXT, PDF | Python / PyMuPDF |
 | CSV | XLSX | openpyxl |
 | XLSX | CSV | openpyxl |
 | DOC, ODT, DOCX, RTF | PDF, DOCX* | LibreOffice |
-| HTML | PDF* | LibreOffice |
+| HTML | TXT, PDF | Python / LibreOffice* |
 | PDF | DOCX* | LibreOffice |
 | XLS, ODS, XLSX | PDF, XLSX* | LibreOffice |
 | PPT, PPTX, ODP | PDF, PPTX* | LibreOffice |
@@ -44,7 +44,7 @@
 - LibreOffice нужен для офисных документов, таблиц и презентаций;
 - FFmpeg нужен для аудио и видео.
 
-Изображения, PDF, TXT, MD, DOCX → TXT, RTF → TXT и CSV/XLSX работают без LibreOffice и FFmpeg. Отсутствие необязательной программы не мешает запуску бота.
+Изображения, PDF, TXT, MD, DOCX, RTF и CSV/XLSX работают без LibreOffice и FFmpeg. Для DOCX → PDF без LibreOffice сохраняются текст и таблицы, а сложное форматирование упрощается. После установки LibreOffice становятся доступны точные офисные направления DOC/DOCX/ODT, XLS/XLSX/ODS и PPT/PPTX/ODP. FFmpeg добавляет аудио- и видеоконвертацию.
 
 ## Установка на Windows
 
@@ -64,14 +64,23 @@
    pip install -r requirements.txt
    ```
 
-5. Скопируйте `.env.example` в `.env` и укажите токен:
+5. Установите внешние конвертеры:
+
+   ```powershell
+   winget install --id TheDocumentFoundation.LibreOffice --accept-source-agreements --accept-package-agreements
+   winget install --id Gyan.FFmpeg --accept-source-agreements --accept-package-agreements
+   ```
+
+   После установки перезапустите PowerShell, чтобы обновился `PATH`. Бот также проверяет стандартный путь LibreOffice в `C:\Program Files\LibreOffice\program\soffice.exe`.
+
+6. Скопируйте `.env.example` в `.env` и укажите токен:
 
    ```powershell
    Copy-Item .env.example .env
    notepad .env
    ```
 
-6. Запустите бота:
+7. Запустите бота:
 
    ```powershell
    python main.py
@@ -83,6 +92,8 @@
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
+sudo apt update
+sudo apt install -y libreoffice ffmpeg
 cp .env.example .env
 python main.py
 ```
