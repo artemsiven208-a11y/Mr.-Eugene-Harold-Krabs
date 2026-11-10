@@ -2,9 +2,10 @@ from pathlib import Path
 
 import fitz
 from PIL import Image
+from docx import Document
 
 from converters.base import ConversionContext
-from converters.documents import txt_to_pdf
+from converters.documents import docx_to_pdf, txt_to_pdf
 from converters.images import image_to_image
 from converters.pdf import pdf_to_txt
 
@@ -39,3 +40,17 @@ def test_txt_pdf_and_pdf_txt_with_russian_text(tmp_path: Path) -> None:
     document.close()
     extracted = pdf_to_txt(context(pdf.path, "txt", tmp_path))
     assert "Привет" in extracted.path.read_text(encoding="utf-8")
+
+
+def test_docx_to_pdf_without_libreoffice(tmp_path: Path) -> None:
+    source = tmp_path / "документ.docx"
+    document = Document()
+    document.add_paragraph("Документ для PDF")
+    table = document.add_table(rows=1, cols=2)
+    table.rows[0].cells[0].text = "Левая ячейка"
+    table.rows[0].cells[1].text = "Правая ячейка"
+    document.save(source)
+    result = docx_to_pdf(context(source, "pdf", tmp_path))
+    extracted = "\n".join(page.get_text() for page in fitz.open(result.path)).replace("\xa0", " ")
+    assert "Документ для PDF" in extracted
+    assert "Левая ячейка" in extracted
