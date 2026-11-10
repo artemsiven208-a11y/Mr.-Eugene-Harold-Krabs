@@ -16,7 +16,7 @@ from converters.base import ConversionContext, ConversionError
 from converters.registry import ConversionRegistry
 from utils.config import Config
 from utils.file_detection import FileInfo, detect_file_type
-from utils.file_manager import create_job_dir, safe_filename
+from utils.file_manager import create_job_dir, has_disk_space, safe_filename
 
 logger = logging.getLogger(__name__)
 router = Router(name="files")
@@ -53,6 +53,9 @@ async def receive_file(
         await message.answer(
             f"Файл слишком большой. Максимальный размер: {config.max_file_size // 1024 // 1024} МБ."
         )
+        return
+    if not has_disk_space(config, file_size or config.max_file_size):
+        await message.answer("На диске недостаточно места для обработки файла.")
         return
     await clear_job_state(state)
     job_dir = create_job_dir(config)
