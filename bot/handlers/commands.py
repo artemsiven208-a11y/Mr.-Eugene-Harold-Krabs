@@ -65,4 +65,3 @@ async def cancel_callback(callback: CallbackQuery, state: FSMContext) -> None:
     await callback.answer("Операция отменена")
     if callback.message:
         await callback.message.edit_text("Операция отменена.")
-

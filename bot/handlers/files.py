@@ -232,4 +232,3 @@ async def convert_callback(callback: CallbackQuery, state: FSMContext, registry:
 async def search_pick_callback(callback: CallbackQuery, state: FSMContext, registry: ConversionRegistry, config: Config, job_semaphore: asyncio.Semaphore) -> None:
     target = callback.data.split(":", 1)[1]
     await start_conversion(callback, target, state, registry, config, job_semaphore)
-

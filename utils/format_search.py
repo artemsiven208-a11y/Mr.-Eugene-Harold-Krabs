@@ -39,4 +39,3 @@ def find_format_candidates(value: str, available: list[str], limit: int = 4) -> 
     if normalized in aliases and aliases[normalized] in available:
         return [aliases[normalized]]
     return difflib.get_close_matches(normalized, available, n=limit, cutoff=0.45)
-

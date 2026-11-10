@@ -34,4 +34,3 @@ def _find_libreoffice(config: Config) -> str | None:
 def detect_external_tools(config: Config) -> ExternalTools:
     ffmpeg = config.ffmpeg_path or shutil.which("ffmpeg")
     return ExternalTools(libreoffice=_find_libreoffice(config), ffmpeg=ffmpeg)
-

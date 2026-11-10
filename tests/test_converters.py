@@ -39,4 +39,3 @@ def test_txt_pdf_and_pdf_txt_with_russian_text(tmp_path: Path) -> None:
     document.close()
     extracted = pdf_to_txt(context(pdf.path, "txt", tmp_path))
     assert "Привет" in extracted.path.read_text(encoding="utf-8")
-

@@ -144,4 +144,3 @@ def libreoffice_convert(context: ConversionContext, executable: str) -> Conversi
             raise ConversionError("LibreOffice не создал выходной файл.")
         expected = candidates[0]
     return ConversionResult(expected)
-

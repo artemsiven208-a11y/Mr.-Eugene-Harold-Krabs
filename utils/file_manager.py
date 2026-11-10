@@ -60,4 +60,3 @@ def job_directory(config: Config) -> Iterator[Path]:
         yield path
     finally:
         cleanup_job(path)
-

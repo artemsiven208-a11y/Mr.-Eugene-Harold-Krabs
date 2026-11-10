@@ -36,4 +36,3 @@ def image_to_image(context: ConversionContext) -> ConversionResult:
     image.save(result, format=save_format, **save_kwargs)
     image.close()
     return ConversionResult(result, warning)
-

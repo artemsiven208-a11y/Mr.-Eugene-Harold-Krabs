@@ -48,4 +48,3 @@ def pdf_to_images(context: ConversionContext) -> ConversionResult:
         for item in outputs:
             zip_file.write(item, item.name)
     return ConversionResult(archive, "Страницы собраны в ZIP-архив.")
-

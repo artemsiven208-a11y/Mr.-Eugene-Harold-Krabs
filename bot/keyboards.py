@@ -35,4 +35,3 @@ def search_confirmation(target: str) -> InlineKeyboardMarkup:
     builder.button(text="Отмена", callback_data="cancel")
     builder.adjust(1, 1, 1)
     return builder.as_markup()
-

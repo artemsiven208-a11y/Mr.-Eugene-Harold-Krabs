@@ -119,4 +119,3 @@ def build_registry(tools: ExternalTools, config: Config) -> ConversionRegistry:
             add(source, "mp3", "MP3 (аудио)", media_converter)
 
     return ConversionRegistry(routes)
-

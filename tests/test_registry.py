@@ -10,4 +10,3 @@ def test_registry_hides_optional_tools() -> None:
     assert registry.get("png", "jpg") is not None
     assert registry.get("png", "mp3") is None
     assert registry.get("docx", "pdf") is None
-

@@ -28,4 +28,3 @@ class ConversionContext:
 class ConversionResult:
     path: Path
     warning: str | None = None
-

@@ -25,4 +25,3 @@ def test_job_directory_cleanup(tmp_path: Path) -> None:
     assert job.is_dir()
     cleanup_job(job)
     assert not job.exists()
-

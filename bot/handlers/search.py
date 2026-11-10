@@ -51,4 +51,3 @@ async def search_format(message: Message, state: FSMContext, registry: Conversio
         f"Возможно, ты имел в виду {candidates[0].upper()}?",
         reply_markup=search_confirmation(candidates[0]),
     )
-

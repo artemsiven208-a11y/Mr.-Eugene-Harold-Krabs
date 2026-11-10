@@ -49,4 +49,3 @@ def load_config() -> Config:
         ffmpeg_path=os.getenv("FFMPEG_PATH") or None,
         temp_root=root,
     )
-

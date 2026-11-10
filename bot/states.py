@@ -31,4 +31,3 @@ async def fallback(message: Message) -> None:
     if message.text and message.text.startswith("/"):
         return
     await message.answer("Отправьте файл, который нужно конвертировать.", reply_markup=main_keyboard())
-
