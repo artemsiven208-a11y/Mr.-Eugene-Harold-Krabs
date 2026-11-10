@@ -91,15 +91,18 @@ def build_registry(tools: ExternalTools, config: Config) -> ConversionRegistry:
         office = lambda context: libreoffice_convert(context, tools.libreoffice)  # noqa: E731
         for source in {"docx", "doc", "odt", "rtf"}:
             add(source, "pdf", "PDF", office)
-            add(source, "docx", "DOCX", office)
+            if source != "docx":
+                add(source, "docx", "DOCX", office)
         add("html", "pdf", "PDF", office)
         add("pdf", "docx", "DOCX", office)
         for source in {"xlsx", "xls", "ods"}:
             add(source, "pdf", "PDF", office)
-            add(source, "xlsx", "XLSX", office)
+            if source != "xlsx":
+                add(source, "xlsx", "XLSX", office)
         for source in {"pptx", "ppt", "odp"}:
             add(source, "pdf", "PDF", office)
-            add(source, "pptx", "PPTX", office)
+            if source != "pptx":
+                add(source, "pptx", "PPTX", office)
 
     if tools.ffmpeg:
         media_audio = {"mp3", "wav", "ogg", "flac", "m4a"}
