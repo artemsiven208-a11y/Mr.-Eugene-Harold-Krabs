@@ -25,6 +25,15 @@ def create_job_dir(config: Config) -> Path:
     return path
 
 
+def has_disk_space(config: Config, expected_bytes: int) -> bool:
+    """Оставляет запас под исходный и выходной файлы."""
+    try:
+        free_bytes = shutil.disk_usage(config.temp_root).free
+    except OSError:
+        return False
+    return free_bytes >= max(10 * 1024 * 1024, expected_bytes * 2)
+
+
 def cleanup_job(path: Path | str) -> None:
     try:
         shutil.rmtree(Path(path), ignore_errors=True)
@@ -51,4 +60,3 @@ def job_directory(config: Config) -> Iterator[Path]:
         yield path
     finally:
         cleanup_job(path)
-

@@ -83,4 +83,3 @@ def detect_file_type(path: Path, original_name: str | None = None, mime_type: st
     if not mime_type:
         mime_type = EXTENSION_MIME.get(extension) or mimetypes.guess_type(name)[0]
     return FileInfo(extension=extension, mime_type=mime_type, category=_category(extension))
-

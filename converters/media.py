@@ -29,4 +29,3 @@ def ffmpeg_convert(context: ConversionContext, executable: str) -> ConversionRes
     if completed.returncode != 0 or not result.exists():
         raise ConversionError("FFmpeg не смог обработать этот медиафайл.")
     return ConversionResult(result)
-

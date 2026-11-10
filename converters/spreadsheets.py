@@ -53,4 +53,3 @@ def xlsx_to_csv(context: ConversionContext) -> ConversionResult:
             zip_file.write(csv_path, csv_path.name)
     workbook.close()
     return ConversionResult(archive, "Листы собраны в ZIP-архив.")
-
